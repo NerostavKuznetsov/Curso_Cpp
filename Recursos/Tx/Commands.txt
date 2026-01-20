@@ -1,0 +1,15 @@
+Atalhos Visual Studio Community 2022 ->
+
+
+CTRL + SHIFT + B = Compilar o código fonte
+CTRL + F5 = Executar o programa sem depurar
+ALT + SHIFT + <ENTER> = Maximizar/Minimizar janela
+CTRL + K + C = Comentar código
+CTRL + C = No final da linha copia ela toda sem precisar selecionar toda a linha!
+
+
+
+
+
+
+

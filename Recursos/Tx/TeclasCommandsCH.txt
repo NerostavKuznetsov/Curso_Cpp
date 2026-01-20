@@ -1,0 +1,109 @@
+📌 Outros exemplos comuns:
+Tecla	         Símbolo	        ASCII
+ENTER	          '\r'	              13
+BACKSPACE	      '\b'	              8
+TAB	               '\t'	              9
+ESC	               27	              27
+SPACE	           ' '	              32
+
+
+Código	                          Vantagem
+if (ch == '\r')	      ✔️ Mais claro (sem precisar decorar que 13 é ENTER)
+if (ch == 13)	      ✔️ Funciona também, mas menos legível
+
+
+Use _getwch() R =  se você precisa ler tecla por tecla (ex: detectar ESC, DEL, etc). 
+
+
+wchar_t ch = _getwch();	Espera uma tecla ser pressionada e guarda em ch
+
+if (ch == 27)	Verifica se a tecla pressionada foi ESC
+
+✅ DELETE
+Decimal: 127
+Hexadecimal: 0x7F
+Símbolo em C++: Não tem um caractere escapado padrão como '\b' ou '\r'.
+Representação: Você usa diretamente o valor 127
+
+
+
+
+
+
+
+
+
+
+
+✅ break
+Serve para sair imediatamente de um loop (ou switch).
+
+📌 Quando o break é executado, o loop para na hora.
+
+🔹 Exemplo:
+cpp
+Copiar
+Editar
+for (int i = 0; i < 10; i++) {
+    if (i == 5)
+        break;
+    std::cout << i << " ";
+}
+// Saída: 0 1 2 3 4
+⤷ Quando i == 5, ele sai do for.
+
+
+
+
+✅ continue
+Serve para pular o restante da repetição atual e ir para a próxima.
+
+📌 Quando o continue é executado, o código abaixo dele é ignorado na iteração atual.
+
+🔹 Exemplo:
+cpp
+Copiar
+Editar
+for (int i = 0; i < 5; i++) {
+    if (i == 2)
+        continue;
+    std::cout << i << " ";
+}
+// Saída: 0 1 3 4
+⤷ Quando i == 2, ele pula o std::cout.
+
+
+
+
+✅ return
+Serve para sair de uma função e, opcionalmente, retornar um valor.
+
+📌 Quando return é chamado:
+
+A função termina na hora.
+
+Você pode voltar um valor para quem chamou a função.
+
+🔹 Exemplo sem valor:
+cpp
+Copiar
+Editar
+void mostrarMensagem() {
+    std::cout << "Olá!\n";
+    return; // termina a função aqui
+}
+🔹 Exemplo com valor:
+cpp
+Copiar
+Editar
+int somar(int a, int b) {
+    return a + b;
+}
+
+// Uso:
+int resultado = somar(5, 3);  // resultado = 8
+🧠 Resumo Tabela:
+Palavra-chave	         O que faz	                            Onde é usada
+break	          Sai do loop ou switch	                        loops, switch
+continue	   Pula para a próxima repetição	           loops (for, while, etc.)
+return	       Sai da função e retorna valor	               dentro de funções

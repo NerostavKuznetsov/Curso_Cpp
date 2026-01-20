@@ -1,0 +1,308 @@
+1.INTRODUÇÃO A PROGRAMAÇÃO C++
+
+A linguagem C++ é uma extrensão da linguagem C, desenvolvida por Bjarne Stroustrup(Cientista da computação da computação dinamarquês) no
+início da década de 1980 na Bell Laboratories.
+
+C++ fornece capacidades para a programação orientada a objetos(Classes, Objetos, outros...)
+C++ Possui todos os elementos da linguagem C e adiciona novos elementos, principalmente elementos orientados a objetos.
+o
+3 Categorias do C++
+1- Linguagem procedural = if, else, for, funções...
+2- Orientaçãp a objetos = Representada pelos aprimoramentos de classe que o C++ adiciona ao C 
+3- Programação genérica = Templates e bibliotecas
+
+C++ é compilada = Todos código C++ é compilado para a Linguagem de Máquina ou seja, os programas são compilados o mais rápido possível.
+
+A maioria dos sistemas operacionais é escrita em C e C++ =
+(Windows 95, Windows 98, 2000, XP, Vista, Windows 7, Windows 8, Windows 10, Mac OS X da Apple, Google Chrome, Appple Iphone, iPad OS, outros...)
+
+A maioris dos jogos de computador e motores de jogos(Engine) são desenvolvidos em C++
+
+Ex: Counter-Strike, Doablo 1, Diablo 2, Warcraft, Unreal Engine, outro... (Todos os jogos da microsoft são escritos em C++)
+
+#include <arquivo.h> ou #include "arquivo.h"
+
+Ao colocar entre <> o arquivos de cabeçalho é buscado nos lugares indicados por uma variável do sistema popularmente conhecida como library path.
+
+
+///////////////////////////////////////////////////////////////
+
+typedaf = Cria apelidos, ou seja no lugar do tipo de dado você poderá usar o NewName.
+Ex: 
+
+#include <iostream>
+#define PausarTexto "PAUSE"
+#define PuleLinha "\n"
+#define Retorne return
+
+int main()
+{
+	typedef char caractere;
+	caractere Letra = 'C';
+	std::cout << "Primeiro Programa C++" << PuleLinha;
+	system(PausarTexto);
+	Retorne 0;
+}
+
+Pré-Processamento = 
+São coisas antes da compilação ou seja, configura o código fonte para o compilador
+Ocorre antes da compilação
+Executa diretivas de pré-processamento(#)
+Indicam que: Serão incluídos arquivos ao fonte(.cpp)
+E fazem determinada modificações no fonte(.cpp)
+
+///////////////////////////////////////////////////////////////
+
+"Uma linguagem de programação é um sistema padronizado de comunicaçãoutilizado para escrever instruções que um computador pode interpretar e executar."
+
+Compilador = É um programa de computador (ou um grupo de programas) que, a partir de um código fonte escrito em uma linguagem de programação,
+cria um programa equivalente, porém escrito em linguagem de máquina: O código objeto.
+
+Código objeto (.obj) = Código fonte traduzido para o código de máquina (0 e 1's)
+- Possui a extensão .obj
+- Gera código de máquina incompleto
+- Ainda será necessário juntar(linkar) as bibliotecasdo C++ ou as que você criar no processo de linkedição
+
+Então o código objeto é apenas meu código fonte traduzido para o código de máquina (binário)
+
+-AINDA FALTA JUNTAS ESTE CÓDIGO OBJETO COM AS BIBLIOTECAS PRONTAS QUE VOCÊ REFERENCIOU EM SEU CÓDIGO 
+E QUE SÃO NECESSÁRIAS PARA O PROGRAMA EXECUTAR-
+
+Programa C++ : faz referências a funções de bibliotecas padrão(cout << da iostream) ou bibliotecas definidas via programação (.h)
+
+[!] O linker ou linkeditor tem por objetivo juntar o código objeto, bibliotecas e outras referências e gerar arquivo executável(.exe) pronto
+
+Código Fonte(.cpp) -> Código Objeto(.obj) -> Executável(.exe)
+1 -> Compilador
+2 -> Linker = Arquivos de biblioteca
+
+Antes de executar um programa(.exe) ele deve ser carregado para a memória RAM do computador
+O programa encarregado de fazer esse carregamento é denominado loader(carregador)
+
+Diretiva de pré-processador(#)
+
+A diretiva #include faz com oque o pré-processador inclua MAIS CÓDIGO em seu programa
+
+Arquivos .h, iostream, não são bibliotecas, são apenas arquivos de definições
+
+#include <arquivo> diz ao pré-processador obter conteúdo do arquivo de incluir na linha da diretiva
+
+Use #include <> para as biliotecas padrões ou seja, são bibliotecas que estão incluidas no núcleo do compilador do C++
+
+Os arquivos de cabeçalho, iostream, .h, etc...alignas
+Não contém exatamento o código que se deseja usar 
+Tem informações de onde pode ser achado o código desejado
+Ao invés de conter a função toda escrita, eles contém simplesment os protótipos das funções 
+Aponta quais as biliotecas devem ser usadas
+
+int main()  =
+
+Os parênteses depois de main() indicam que main é um bloco de construção de programa chamado de FUNÇÃO 
+Os programas em C++, em geral, consistem uma ou mais funções e classes
+Todo programa deve ter exatamente uma única função main
+main() é decladara com um int que a precede
+int é o retorno tipo de valor da função principal ()
+Padrão return 0; // programa executado com sucesso 
+
+{ inicio deu m bloco
+
+} fim de um bloco
+
+cout("console-out") = é a declaração que escreve "algum texto" na tela
+
+
+Namespaces = 
+
+std::cout e não apenas cout
+cout está espaço de nomes(Namespace) padrão (std)
+
+Namespaces são nomes atribuídos a partes do código que ajudam na redução de pontencial conflito de nomes
+
+std::cout, informa ao compilador para que use esse único cout que está disponível no namespace std
+
+std::endl = Usado para indicar linha terminou e pula linha (quebra de linha)
+
+\t = Cria uma aba horizontal = é uma tabulação
+\\ = Insere um caractere de barra invertida (\)	
+\" = Insere um caractere de aspas dupla
+// = Para comentários curtos e     /* para longos.
+
+==  // compara igualdade
+!=  // diferente
++   // concatenação
+[]  // acesso a caractere por índice
+=   // atribuição
++=  // concatenação e atribuição
+
+
+Método	                  Descrição
+length()ou size()	Retorna o tamanho da string
+empty()	            Retorna true se estiver vazia
+clear()	            Apaga todo o conteúdo
+at(i)	            Acessa o caractere na posição i com verificação de limite
+c_str()	            Retorna um ponteiro const char* (útil com C)
+substr(pos, len)	Retorna uma substring a partir de pos com len caracteres
+find("abc")	        Retorna a posição de "abc", ou std::string::npos se não encontrar
+rfind("abc")	    Igual ao find, mas busca de trás para frente
+erase(pos, len)	    Remove parte da string
+insert(pos, "abc")	Insere texto na posição indicada
+replace(pos, len, "xyz")	Substitui parte da string
+append("mais")	    Adiciona ao final
+compare("abc")	    Compara (retorna 0 se igual, <0 se menor, >0 se maior)
+begin() / end()	    Iteradores para loops (for, std::for_each, etc.)
+
+Expressão	        Tipo	           Significado
+PID == 0	     Comparação	         Verdadeiro se PID for igual a 0
+PID = 0	         Atribuição	         Define o valor de PID como 0
+PID != 0	     Comparação	         Verdadeiro se PID não for 0
+
+
+
+🧰 Versões relacionadas
+
+Função	     Converte para...
+std::stoi	       int
+std::stol	       long
+std::stoll	   long long
+std::stoul	   unsigned long
+std::stof	       float
+std::stod	       double
+
+
+getline	= Lê o que o usuário digitou
+empty() = Verifica se digitou algo
+std::stoi()	= Converte string para número
+catch (...)	= Se falhar, avisa e reinicia
+
+A diretiva de pré-processador #include indica para incluir o arquivo de cabeçalho iostream
+Função principal - Todo programa C++ começa com esta função principal 'main'
+
+'{' Indica o inicio de um bloco e '}' o fim de um bloco
+'cout' Comando de saída de dados(colocae uma frase especificada)
+'wcout' 
+'endl' Indica para inserir um caracter de quebra de linha na (String)
+'system("PAUSE");' Chama o shell do windows (DOS) e coloca este comando PAUSE 
+'system("color 5F");' Cor de fundo e cor de letra 5 = cor de fundo e F = cor da letra
+'return 0;' Retorna para o sistema operacional zero, que é o padrão para informar que tudo deu certo se a função main der certo ela retornará 0
+ 
+Pré-processamento = Algo que ocorre antes da compilação
+
+int = Número inteiro
+float = Numero de ponto flutuante 
+double = 
+bool = 
+char = Caractere original em C e C++, usado para armazenar caracteres ASCII e não é adequado em vários idiomas
+wchat_t = Usa um caracter largo(wide) para representar UNICODE
+signed = Inclui valores positivos(incluindo 0) e também negativos (int Numero = signed = signed int Numero)
+unsigned = Inclui apenas valores positivos(incluindo 0)
+short = 
+long = 
+const = Numeros que não podem ser alterados ou seja são constantes
+
+
+Endereço A --> valor B  
+Valor B --> valor C  
+Valor C --> dinheiro do jogador
+
+BOOL ReadProcessMemory(
+  HANDLE hProcess,
+  LPCVOID lpBaseAddress,  // <- Endereço que você quer ler
+  LPVOID lpBuffer,        // <- Onde vai guardar o que leu
+  SIZE_T nSize,           // <- Quantos bytes quer ler
+  SIZE_T *lpNumberOfBytesRead // <- Opcional, pode ser nullptr
+);
+
+
+std::string nome = "Neo";
+nome += "stav"; // "Neostav"
+
+std::string entrada;
+std::getline(std::cin, entrada); // Lê com espaços
+//////////////////////////////////////////////////
+
+Funções C++ podem retornar um valor ou não(void)
+main() = sempre retorna um número inteiro(int)
+Este valor (return 0) é retornado ao sistema operacional
+
+C++ é case-sensitive (diferencia letras minúsculas de maiúsculas)
+
+Processador(CPU)
+
+Memória RAM(Volátil)  = Local temporário para ler e armazenar informações dos programas(softwares) e outros componentes do computador
+Memória Secundária(Não Volátil) = HD, SSD que serve de armazenamente e ao desligao  PC não iremos perder nossos dados.
+
+#include <iostream>
+#include <fcntl.h>
+#include <io.h>
+
+using namespace std;
+int main()
+{
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	wcout << L"\u263A" << endl;
+	system("PAUSE");
+}
+
+
+
+uintptr_t =  É um tipo de dado especial da linguagem C/C++ e aparece muito em programação de baixo nível,
+especialmente em hacks de jogos, ponteiros, sistemas operacionais, drivers, engenharia reversa, etc.
+
+uintptr_t = Tipo de dado inteiro sem sinal (unsigned integer(unsigned int)) que é grande o suficiente para armazenar um ponteiro.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+C++ é uma linguagem multiplataforma que pode ser usada para criar aplicativos de alto desempenho.
+C++ foi desenvolvido por -Bjarne Stroustrup-, como uma extensão da linguagem C.
+C++ dá aos programadores um alto nível de controle sobre os recursos do sistema e a memória. (WINDOWS API)
+
+✅ C++
+-> Controle de memória: manual (você gerencia alocação e liberação com new, delete, ou malloc, free)
+-> Acesso à API do Windows: nativo, sem camadas extras.
+-> Desempenho: muito alto, ideal para sistemas de baixo nível, drivers, jogos e exploits.
+-> Responsabilidade: maior — erros como memory leaks, dangling pointers e buffer overflows são comuns se você não for cuidadoso.
+
+🔧 Ideal para performance máxima, aplicações sensíveis a tempo, engenharia reversa, cheats, sistemas embarcados, uso bruto da API do Windows.
+
+Sistemas embarcados: 
+
+
+🧠  -> Recursos do C++ ...
+    * Controle total da memória. 
+    * Acesso direto à API do Windows.
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

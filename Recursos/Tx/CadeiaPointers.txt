@@ -1,0 +1,197 @@
+ 
+ 
+   [0x91CF90] → 0x00A0F100
+      0x00A0F100 + 0x10 = 0x00A0F110    
+   [0x00A0F110] → 0x00AB1234
+      0x00AB1234 + 0xB4 = 0x00AB12E8 (valor final do dinheiro)  
+
+
+
+
+  Calc = 0x400000 + 0x51CF90 = [PRIMEIRO PONTEIRO]
+  Calc = 0x400000 + 0x51CF90 = 0x91CF90
+
+  0x91CF90 = Endereço onde está armazenado o primeiro ponteiro. *
+  O conteúdo da memória em 0x91CF90 é o endereço 0x00A0F100, que será usado como base para o próximo offset.
+
+  0x91CF90 é:
+  endereço de memória → sim, é um local específico na memória RAM do processo.
+  Um ponteiro também → sim, porque o conteúdo dele é outro endereço (por exemplo, 0x00A0F100), ou seja, ele aponta para outro lugar.
+
+
+   Ponteiro  →  Endereço
+  [0x91CF90] → 0x00A0F100	                                      
+
+  Endereço  +  Offset      = Ponteiro
+ 0x00A0F100 +   0x10       = 0x00A0F110	
+                              
+  Ponteiro   →   Endereço
+ [0x00A0F110] →  0x00AB1234                                      
+
+ Endereço  + Offsett =  Endereço Final do dinheiro
+ 0x00AB1234 +   0xB4  =         0x00AB12E8	                                .
+
+
+0x400000 +  0x51CF90 = 0x91CF90
+
+Etapa 1 – Você tem um endereço inicial:
+Caixa 1 (Endereço: 0x91CF90)
+  ↓
+  Conteúdo: 0x00A0F100
+✅ Aqui o conteúdo da caixa é um outro endereço → ou seja, um ponteiro!
+
+Etapa 2 – Vá para o endereço apontado:
+Caixa 2 (Endereço: 0x00A0F100)
+  ↓
+ Conteúdo: não é o valor final ainda...
+✅ Aqui você aplica um offset de 0x10 → ou seja:
+
+0x00A0F100 + 0x10 = 0x00A0F110
+
+Etapa 3 – Vá até o novo endereço com o offset:
+Caixa 3 (Endereço: 0x00A0F110)
+  ↓
+  Conteúdo: 0x00AB1234
+
+Etapa 4 – Aplicar o último offset:
+
+ 0x00AB1234 + 0xB4 = 0x00AB12E8 = ENDEREÇO FINAL               
+
+
+
+
+unsigned int CASH_OFFSET[] = {0x10, 0xB4};
+
+sizeof(CASH_OFFSET) é o total de bytes do array inteiro.       
+
+sizeof(CASH_OFFSET[0]) é o tamanho de um único elemento.
+
+Dividindo um pelo outro, você obtém o número de elementos.
+
+Exemplo concreto:
+
+unsigned int CASH_OFFSET[] = {0x10, 0xB4}; // 2 elementos
+sizeof(CASH_OFFSET) == 8 bytes  // 2 elementos × 4 bytes cada = 8 bytes
+sizeof(CASH_OFFSET[0]) == 4 bytes
+8 / 4 == 2  // correto  
+
+2 elementos 
+
+UNSIGNED INT 0x10 = 4 bytes
+UNSIGNED INT 0xB4 = 4 bytes
+
+
+
+DWORD ResolverPointerChain(HANDLE hProcess, DWORD Calc, unsigned int offsets[], int size) 
+{
+	DWORD FinalAddress = Calc;   
+
+        DWORD temp = 0;
+
+        // 1º passo: ler o ponteiro inicial
+        ReadProcessMemory(hProcess, (LPCVOID)Calc, &temp, sizeof(temp), nullptr);
+        Calc = temp + 0x10;  // aplica primeiro offset
+
+        // 2º passo: ler próximo ponteiro
+        ReadProcessMemory(hProcess, (LPCVOID)Calc, &temp, sizeof(temp), nullptr);
+        Calc = temp + 0xB4;  // aplica segundo offset
+
+    return Calc;
+} 
+
+OU POSSO USAR ASSIM
+
+DWORD ResolverPointerChain(HANDLE hProcess, DWORD Calc, unsigned int offsets[], int size) // 
+{
+	DWORD FinalAddress = Calc;  
+	for (int i = 0; i < size; i++) 
+    {
+		DWORD temp = 0; 
+		ReadProcessMemory(hProcess, (LPCVOID)FinalAddress, &temp, sizeof(temp), nullptr); 
+		FinalAddress = temp + offsets[i];
+    }
+    return FinalAddress;
+}
+
+
+
+
+// Exemplo de um array ->
+
+#include <iostream>
+
+int main() 
+{
+    unsigned int CASH_OFFSET[] = { 0x10, 0xB4, 0x28 , 0xABCFD };
+
+    int size = sizeof(CASH_OFFSET) / sizeof(CASH_OFFSET[0]);
+
+    std::cout << "Total de elementos no array: " << size << "\n\n";
+
+    for (int i = 0; i < size; i++) 
+    {
+        std::cout << "Iteração " << i << ":\n";
+        std::cout << "  Offset = 0x" << std::uppercase << std::hex << CASH_OFFSET[i] << "\n";
+        std::cout << "-----------------------------\n";
+    }
+
+    return 0;
+}
+
+
+Saída = 
+
+
+
+
+
+
+
+
+// Exemplo de converter um valor em hexadecimal
+
+#include <iostream>
+#include <iomanip>
+
+int main() 
+{
+    int valor = 255;
+
+    std::cout << "Decimal do valor = 0x" << std::uppercase << std::hex << valor << std::endl;
+	system("pause");
+    return 0;
+}
+
+Saída ->  
+
+Decimal do valor = 0xFF
+Pressione qualquer tecla para continuar. . .
+
+
+
+
+bool valor = true;
+
+if (!valor) {
+    std::cout << "Não é verdadeiro\n";
+} else {
+    std::cout << "É verdadeiro\n";
+}
+
+
+
+Saída ->
+
+É verdadeiro
+
+
+
+⚠️ Diferenças principais:
+
+| Aspecto         | bool               | BOOL                      |
+|-----------------|--------------------|---------------------------|
+| Tipo real       | `bool`             | `int`                     |
+| Valores válidos | `true` / `false`   | `0` (FALSE) ou `1` (TRUE) |
+| Tamanho         | 1 byte             | 4 bytes                   |
+| Biblioteca      | <iostream> etc     | <Windows.h>               |
+| Uso comum       | Código C++ puro    | Chamadas da API do Windows|
